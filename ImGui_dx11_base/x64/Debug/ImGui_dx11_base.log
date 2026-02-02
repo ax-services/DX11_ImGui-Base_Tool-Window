@@ -1,0 +1,11 @@
+﻿  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  main.cpp
+  Code wird generiert...
+MSVCRTD.lib(exe_main.obj) : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol "main" in Funktion ""int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)".
+C:\Users\Vincent\Desktop\ax-services.net\DX11_ImGui-Base\x64\Debug\ImGui_dx11_base.exe : fatal error LNK1120: 1 nicht aufgelöste Externe

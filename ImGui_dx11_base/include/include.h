@@ -1,0 +1,16 @@
+#pragma once
+#include "../ext/imgui.h"
+#include "../ext/imgui_impl_win32.h"
+#include "../ext/imgui_impl_dx11.h"
+#include "../ext/imgui_internal.h"
+#include <d3d11.h>
+#include <dxgi1_5.h>
+#include <tchar.h>
+#include <windows.h>
+#include <tlhelp32.h>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <thread>
+#include <unordered_map>
+#include <cmath>
