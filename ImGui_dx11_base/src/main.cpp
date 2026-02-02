@@ -1,6 +1,8 @@
 #include "../include/include.h"
 #include "test.h"
 #pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "dwmapi.lib")
+#include <dwmapi.h>
 
 static ID3D11Device* g_pd3dDevice = nullptr;
 static ID3D11DeviceContext* g_pd3dDeviceContext = nullptr;
@@ -17,6 +19,30 @@ void CleanupDeviceD3D();
 void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+void RoundWindow(HWND hwnd, int radius)
+{
+    RECT rc;
+    GetWindowRect(hwnd, &rc);
+    int width = rc.right - rc.left;
+    int height = rc.bottom - rc.top;
+
+    HRGN hRgn = CreateRoundRectRgn(0, 0, width, height, radius, radius);
+    SetWindowRgn(hwnd, hRgn, TRUE);
+}
+
+void MakeTransparent(HWND hwnd)
+{
+    LONG exStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+
+    exStyle &= ~WS_EX_TOOLWINDOW;
+    exStyle |= WS_EX_LAYERED;
+
+    SetWindowLong(hwnd, GWL_EXSTYLE, exStyle);
+
+    SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 155, LWA_ALPHA);
+}
+
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 {
@@ -38,7 +64,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 
     HWND hwnd = CreateWindowW(
         wc.lpszClassName,
-        L"",
+        L"f",
         WS_POPUP,
         100, 100,
         WindowSize.x, WindowSize.y,
@@ -50,6 +76,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 
     ShowWindow(hwnd, SW_SHOWDEFAULT);
     UpdateWindow(hwnd);
+
+    RoundWindow(hwnd, 20);
+    MakeTransparent(hwnd);
 
     if (!CreateDeviceD3D(hwnd))
     {
@@ -93,15 +122,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
         ImGui_ImplWin32_NewFrame();
         ImGui::NewFrame();
 
-        menu_test();
+        menu_test(); // GUI rendern
 
         ImGui::Render();
-        const float clear_color[4] = { 0,0,0,1 };
+        const float clear_color[4] = { 0,0,0,0 }; 
         g_pd3dDeviceContext->OMSetRenderTargets(1, &g_mainRenderTargetView, nullptr);
         g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color);
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-        g_pSwapChain->Present(1, 0);
+        g_pSwapChain->Present(0, 0);
     }
 
     ImGui_ImplDX11_Shutdown();

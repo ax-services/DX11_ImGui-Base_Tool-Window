@@ -6,6 +6,7 @@
   imgui_tables.cpp
   imgui_widgets.cpp
   main.cpp
+C:\Users\Vincent\Desktop\DX11_ImGui-Base_Tool-Window-main\ImGui_dx11_base\src\main.cpp(65,17): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
   Code wird generiert...
 MSVCRTD.lib(exe_main.obj) : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol "main" in Funktion ""int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)".
-C:\Users\Vincent\Desktop\ax-services.net\DX11_ImGui-Base\x64\Debug\ImGui_dx11_base.exe : fatal error LNK1120: 1 nicht aufgelöste Externe
+C:\Users\Vincent\Desktop\DX11_ImGui-Base_Tool-Window-main\x64\Debug\ImGui_dx11_base.exe : fatal error LNK1120: 1 nicht aufgelöste Externe

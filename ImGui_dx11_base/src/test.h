@@ -9,6 +9,9 @@ ImVec2 WindowSize = ImVec2(500, 400);
 void menu_test()
 {
     ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.2f, 0.2f, 0.2f, 0.7f));
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 10.f);
+
 
     ImGui::SetNextWindowSize({WindowSize.x, WindowSize.y}, ImGuiCond_Once);
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Once);
@@ -19,7 +22,7 @@ void menu_test()
         ImGuiWindowFlags_MenuBar |
         ImGuiWindowFlags_NoTitleBar |
         ImGuiWindowFlags_NoMove | 
-        ImGuiWindowFlags_NoResize
+        ImGuiWindowFlags_NoResize 
     );
 
     ImGui::Text("This is a test window.");
@@ -27,4 +30,5 @@ void menu_test()
 
     ImGui::End();
     ImGui::PopStyleColor();
+    ImGui::PopStyleVar(2);
 }
